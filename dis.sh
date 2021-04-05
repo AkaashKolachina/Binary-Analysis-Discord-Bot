@@ -1,5 +1,5 @@
 
-echo "Attemptng to disassemble $1"
+echo "Attempting to disassemble $1"
 
 # Clear out file if it exists
 if test -f "symbols.txt"; 
