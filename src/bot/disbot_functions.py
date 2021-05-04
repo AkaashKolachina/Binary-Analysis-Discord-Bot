@@ -26,7 +26,7 @@ async def read_symbols(ctx, executable, symbol):
     for line in file:
         line = line.rstrip("\n")
         if symbol in line:
-            await ctx.send(line.replace('_','\_'))
+            await ctx.send("`" + line + "`")
             has_symbol = True
     file.close()
 
@@ -47,6 +47,6 @@ async def get_rop_gadgets(ctx, executable):
     abs_path = SCRIPT_PATH + ROP_FILE_PATH
     if os.path.isfile(abs_path) and os.path.getsize(abs_path) > 0:
         file = open(abs_path, "r")
-        await ctx.send(file.read())
+        await ctx.send("```" + file.read() + "```")
     else:
         await ctx.send("Gadgets not found")
