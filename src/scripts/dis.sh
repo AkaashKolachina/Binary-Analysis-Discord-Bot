@@ -5,14 +5,14 @@ echo "Attempting to disassemble $1"
 
 # TODO Add a folder to put files like this into
 # This way it can be accessed by disbot
-if test -f "symbols.txt"; 
+if test -f "src/results/symbols.txt"; 
 then
-    rm "symbols.txt"
+    rm "src/results/symbols.txt"
 fi
 
-objdump --syms $1 > symbols.txt
+objdump --syms $1 > src/results/symbols.txt
 
-if [ -s "symbols.txt" ]
+if [ -s "src/results/symbols.txt" ]
 then
     echo "Success! Table stored at symbols.txt"
 else

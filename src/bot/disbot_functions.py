@@ -12,7 +12,7 @@ import sys
 import discord
 import os
 
-SCRIPT_PATH = ""
+SCRIPT_PATH = "/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/results/"
 
 
 async def read_symbols(ctx, executable, symbol):
@@ -47,6 +47,10 @@ async def get_rop_gadgets(ctx, executable):
     abs_path = SCRIPT_PATH + ROP_FILE_PATH
     if os.path.isfile(abs_path) and os.path.getsize(abs_path) > 0:
         file = open(abs_path, "r")
-        await ctx.send("```" + file.read() + "```")
+        lines = file.readlines()
+        await ctx.send(lines[0].strip())
+        for i in range(2,len(lines)):
+            if lines[i].strip():
+                await ctx.send("```" + lines[i] + "```")
     else:
         await ctx.send("Gadgets not found")
