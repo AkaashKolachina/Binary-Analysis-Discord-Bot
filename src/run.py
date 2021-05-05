@@ -19,15 +19,14 @@ def main():
     async def find_symbol_entry(ctx, symbol):
         if ctx.message.attachments:
             await df.download(ctx)
-        # You should prob move this out of the test folder
-        executable = '/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/test-files/current_file'
+        executable = 'src/active-files/current_file'
         await df.read_symbols(ctx,executable,symbol)
     
     @bot.command(name = 'rop', pass_context = True)
     async def generate_rop_gadgets(ctx):
         if ctx.message.attachments:
             await df.download(ctx)
-        executable = '/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/test-files/current_file'
+        executable = 'src/active-files/current_file'
         await df.get_rop_gadgets(ctx,executable)
 
     bot.run(TOKEN)

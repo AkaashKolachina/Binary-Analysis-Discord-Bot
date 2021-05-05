@@ -12,16 +12,15 @@ import sys
 import discord
 import os
 
-SCRIPT_PATH = "/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/results/"
-
+RESULT_PATH = "src/results/"
 
 async def read_symbols(ctx, executable, symbol):
-    SYMBOL_PATH= "symbols.txt"
+    SYMBOL_PATH = "symbols.txt"
     has_symbol = False
-    dis_script = '/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/scripts/dis.sh'
+    dis_script = 'src/scripts/dis.sh'
     call = subprocess.check_call("sh " + dis_script + " '%s'" % executable , shell=True)
 
-    abs_path = SCRIPT_PATH + SYMBOL_PATH
+    abs_path = RESULT_PATH + SYMBOL_PATH
     file = open(abs_path, "r")
     for line in file:
         line = line.rstrip("\n")
@@ -35,16 +34,16 @@ async def read_symbols(ctx, executable, symbol):
 
 
 async def download(ctx):
-    download_path = '/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/test-files/current_file'
+    download_path = 'src/active-files/current_file'
     await ctx.message.attachments[0].save(fp = download_path)
 
 
 async def get_rop_gadgets(ctx, executable):
     ROP_FILE_PATH = "rop_file.txt"
-    rop_script = '/Users/akaashkolachina/UIUC2020/Binary-Analysis-Discord-Bot/src/scripts/rop.sh'
+    rop_script = 'src/scripts/rop.sh'
     call = subprocess.check_call("sh " + rop_script + " '%s'" % executable , shell=True)
 
-    abs_path = SCRIPT_PATH + ROP_FILE_PATH
+    abs_path = RESULT_PATH + ROP_FILE_PATH
     if os.path.isfile(abs_path) and os.path.getsize(abs_path) > 0:
         file = open(abs_path, "r")
         lines = file.readlines()
